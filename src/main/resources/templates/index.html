@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,6 +9,10 @@
 </head>
 <body>
 <h1>
+    <a href="/auth/login">Login</a>
+    <form sec:authorize="isAuthenticated()"  th:action="@{/auth/logout}" method="post">
+        <button type="submit">LOGOUT</button>
+    </form>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque cum facere ipsum iure laboriosam nihil
     quibusdam ratione voluptates voluptatum. Accusantium, culpa distinctio facere illo natus quo similique soluta vitae!
 </h1>

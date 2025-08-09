@@ -2,6 +2,7 @@ package org.example.gold_site.controller;
 
 import org.example.gold_site.models.User;
 import org.example.gold_site.repositories.UserRepository;
+import org.example.gold_site.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,7 @@ import java.time.LocalDateTime;
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserService userService;
 
     @GetMapping("/login")
     public String login() {
@@ -39,16 +37,13 @@ public class AuthController {
     public String register(@ModelAttribute("user") User user,
                            RedirectAttributes redirectAttributes) {
         try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setCreated(LocalDateTime.now());
-            user.setUpdated(LocalDateTime.now());
-            userRepository.save(user);
-            redirectAttributes.addAttribute("message", "Successfully registered!");
+            userService.registerUser(user);
+            redirectAttributes.addFlashAttribute("message", "Successfully registered!");
+            return "redirect:/auth/login";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/auth/register";
         }
-        return "redirect:/auth/login";
     }
 
 }

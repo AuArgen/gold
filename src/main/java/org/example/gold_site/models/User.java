@@ -1,14 +1,15 @@
 package org.example.gold_site.models;
 
 import jakarta.persistence.*;
+import org.example.gold_site.enums.Role;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,10 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @Column(nullable = false)
     private String lastName;
@@ -80,7 +85,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     public String getPassword() {
@@ -148,4 +153,11 @@ public class User implements UserDetails {
         this.updatedAt = updated;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

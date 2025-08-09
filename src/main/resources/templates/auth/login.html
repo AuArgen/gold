@@ -44,6 +44,7 @@
 
 <div class="container">
     <h2 class="text-center">Login</h2>
+    <h4 th:if="${error_message}" th:text="${error_message}" class="text-danger"></h4>
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <form class="login-form" th:action="@{/auth/login}" method="post">
