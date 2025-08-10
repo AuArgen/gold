@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="content">
+<div class="container bg-light mt-5 p-5 shadow-sm">
+    <h3>Welcome to price page!</h3>
+    <p>This is cool admin panel! :)</p>
+</div>
+
+
+<div class="container my-3 p-5 bg-light border">
+    <div class="d-flex justify-content-between">
+        <h4>List price...</h4>
+        <a th:href="@{/admin/price/parsing}">Parsing async</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Published</th>
+            <th scope="col">Title</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Price buy</th>
+            <th scope="col">Price sale</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${prices}">
+                <td th:text="*{item.id}"></td>
+                <td th:text="*{item.publishedAt}"></td>
+                <td th:text="*{item.gold.title}"></td>
+                <td th:text="*{item.gold.weight}"></td>
+                <td th:text="*{item.priceBuy}"></td>
+                <td th:text="*{item.priceSale}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

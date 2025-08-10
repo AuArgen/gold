@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="content">
+<div class="container bg-light mt-5 p-5 shadow-sm">
+    <h3>Welcome to gold page!</h3>
+    <p>This is cool admin panel! :)</p>
+</div>
+
+<div class="container bg-light my-5 p-5 border">
+    <form th:action="@{/admin/gold}" method="post" th:object="${gold}">
+        <h4>Add new gold!</h4>
+
+        <h6 th:if="${message}" th:text="${message}" class="alert alert-info"></h6>
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="p-3">
+            <input type="text" class="form-control"
+                   placeholder="Title"
+                   th:field="*{title}"
+                   required
+            >
+        </div>
+        <div class="p-3">
+            <textarea class="form-control"
+                      placeholder="Description"
+                      th:field="*{description}"
+                      required
+
+            ></textarea>
+        </div>
+
+        <div class="p-3">
+            <input type="number" class="form-control"
+                   placeholder="Weight"
+                   th:field="*{weight}"
+                   required
+
+            >
+        </div>
+
+        <button class="btn m-3 btn-primary" type="submit"> Add</button>
+    </form>
+</div>
+
+<div class="container my-3 p-5 bg-light border">
+    <h4>List gold...</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${golds}">
+                <td th:text="*{item.id}"></td>
+                <td th:text="*{item.title}"></td>
+                <td th:text="*{item.description}"></td>
+                <td th:text="*{item.weight}"></td>
+                <td th:text="*{item.createdAt}"></td>
+                <td><a th:href="'/admin/gold?id=' + *{item.id} ">Update</a> </td>
+                <td><a th:href="'/admin/gold/delete/' + *{item.id} ">Delete</a> </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

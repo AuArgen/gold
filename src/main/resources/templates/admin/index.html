@@ -1,13 +1,9 @@
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin panel</title>
-</head>
-<body>
-Welcome to admin panel!
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="content">
+    <div class="container bg-light mt-5 p-5 shadow-sm">
+        <h3>Welcome to admin!</h3>
+        <p>This is cool admin panel! :)</p>
+    </div>
 </body>
 </html>

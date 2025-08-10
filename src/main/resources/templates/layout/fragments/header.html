@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body th:fragment="header">
+
+<!--==================================================-->
+<!-- Start dreamhub Main Menu Area -->
+<!--==================================================-->
+<div id="sticky-header" class="dreamhub_nav_manu">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-3">
+                <div class="logo">
+                    <a class="logo_img" href="index1.html" title="dreamhub">
+                        <img src="a/assets/images/logo.png" alt=""/>
+                    </a>
+                    <a class="main_sticky" href="index1.html" title="dreamhub">
+                        <img src="a/assets/images/logo2.png" alt="astute"/>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-9 pl-0 pr-0">
+                <nav class="dreamhub_menu">
+                    <ul class="nav_scroll">
+                        <li><a href="index1.html">Home</a></li>
+                        <li><a href="#">Pages <span><i class="fas fa-angle-down"></i></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="team.html">Our Team</a></li>
+                                <li><a href="faq.html">Faq</a></li>
+                                <li><a href="404.html">404</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Feature <span><i class="fas fa-angle-down"></i></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="service.html">Our Service</a></li>
+                                <li><a href="service-details.html">Service Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="pricing.html">Pricing </a></li>
+                        <li><a href="#">Blog <span><i class="fas fa-angle-down"></i></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="blog.html">Blog List</a></li>
+                                <li><a href="blog-details.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
+                    </ul>
+                    <div th:if="${#authorization.expression('isAnonymous()')}" class="header-button">
+                        <a th:href="@{/auth/login}">Get Started <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                    <form method="post" th:action="@{/auth/logout}"
+                          th:if="${#authorization.expression('isAuthenticated()')}"
+                          class="header-button">
+                        <a>
+                            <button class="border-0 bg-transparent text-white">Logout</button>
+                        </a>
+                    </form>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- dreamhub Mobile Menu Area -->
+<div class="mobile-menu-area sticky d-sm-block d-md-block d-lg-none ">
+    <div class="mobile-menu">
+        <nav class="dreamhub_menu">
+            <ul class="nav_scroll">
+                <li><a href="index1.html">Home</a></li>
+                <li><a href="#">Pages <span><i class="fas fa-angle-down"></i></span></a>
+                    <ul class="sub-menu">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="faq.html">Faq</a></li>
+                        <li><a href="404.html">404</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Services <span><i class="fas fa-angle-down"></i></span></a>
+                    <ul class="sub-menu">
+                        <li><a href="service.html">Our Service</a></li>
+                        <li><a href="service-details.html">Service Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="pricing.html">Pricing </a></li>
+                <li><a href="#">Blog <span><i class="fas fa-angle-down"></i></span></a>
+                    <ul class="sub-menu">
+                        <li><a href="blog.html">Blog List</a></li>
+                        <li><a href="blog-details.html">Blog Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!--==================================================-->
+<!-- End dreamhub Main Menu  -->
+<!--==================================================-->
+
+
+</body>
+</html>

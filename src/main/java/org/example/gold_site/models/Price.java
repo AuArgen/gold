@@ -89,4 +89,12 @@ public class Price {
     public void setGold(Gold gold) {
         this.gold = gold;
     }
+
+    public Double getPriceBuyDouble() {
+        return priceBuy == null ? 0 : priceBuy.doubleValue() / 10000;
+    }
+
+    public Double getPriceSaleDouble() {
+        return priceSale == null ? 0 : priceSale.doubleValue() / 10000;
+    }
 }
