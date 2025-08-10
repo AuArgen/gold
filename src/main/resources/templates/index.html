@@ -1,20 +1,140 @@
 <!doctype html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<h1>
-    <a href="/auth/login">Login</a>
-    <form sec:authorize="isAuthenticated()"  th:action="@{/auth/logout}" method="post">
-        <button type="submit">LOGOUT</button>
-    </form>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque cum facere ipsum iure laboriosam nihil
-    quibusdam ratione voluptates voluptatum. Accusantium, culpa distinctio facere illo natus quo similique soluta vitae!
-</h1>
+
+
+<!--==================================================-->
+<!-- Start dreamhub hero section -->
+<!--==================================================-->
+<div th:fragment="content" class="hero-section d-flex align-items-center">
+    <div class="container">
+        <div class="row hero-bg align-items-center">
+            <div class="col-lg-12">
+                <!-- hero content -->
+                <div class="hero-content">
+                    <h1>Кыргыз Алтын</h1>
+                    <h4 class="text-muted">Надёжный источник цен на золото в реальном времени</h4>
+                </div>
+
+                <!-- hero description -->
+                <div class="hero-description">
+                    <p>Алтын баалары жана сиздин алтын башкаруу платформаңыз. Мы предоставляем
+                        актуальную информацию, аналитику и удобные инструменты для работы с золотом и другими
+                        драгоценными металлами.</p>
+                </div>
+
+                <!-- extra info -->
+                <div class="hero-extra mt-3">
+                    <p><i class="bi bi-check-circle-fill text-success"></i> Ежедневное обновление цен</p>
+                    <p><i class="bi bi-check-circle-fill text-success"></i> Аналитика и графики</p>
+                    <p><i class="bi bi-check-circle-fill text-success"></i> Удобный доступ с любого устройства</p>
+                </div>
+
+                <!-- hero buttons -->
+                <div class="hero-button mt-4">
+                    <a href="#" class="btn btn-primary btn-lg me-2">
+                        Request a Quote <i class="bi bi-arrow-right"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary btn-lg">
+                        Подробнее <i class="bi bi-info-circle"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- hero shape -->
+            <div class="hero-shape">
+                <img src="a/assets/images/slider/hero-shp.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!--==================================================-->
+<!--End dreamhub hero section  -->
+<!--==================================================-->
+
+
+<!--==================================================-->
+<!-- Start Dreamhub Dashboard section -->
+<!--==================================================-->
+<div class="section">
+    <div class="container my-3 p-5 bg-light border overflow-auto">
+        <div class="d-flex justify-content-between">
+            <h4>Баалардын тизмеси...</h4>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Күнү</th>
+                <th scope="col">Аты</th>
+                <th scope="col">Алуу</th>
+                <th scope="col">Сатуу</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item, el: ${prices}">
+                <td th:text="${el.count}"></td>
+                <td th:text="${item.publishedAt}"></td>
+                <td th:text="${item.gold.title}"></td>
+
+                <!-- Price Buy -->
+                <td>
+                    <div class="position-relative d-inline">
+                        <span class="me-5" th:text="${item.priceBuyDouble}"></span>
+
+                        <!-- Разница > 0 -->
+                        <span th:if="${item.differenceBuy > 0}"
+                              th:text="'↑ ' + ${item.differenceBuy}"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    </span>
+
+                        <!-- Разница < 0 -->
+                        <span th:if="${item.differenceBuy < 0}"
+                              th:text="'↓ ' + ${item.differenceBuy}"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    </span>
+
+                        <!-- Разница = 0 -->
+                        <span th:if="${item.differenceBuy == 0}"
+                              th:text="${item.differenceBuy}"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                    </span>
+                    </div>
+                </td>
+
+                <!-- Price Sale -->
+                <td>
+                    <div class="position-relative d-inline">
+                        <span class="me-5" th:text="${item.priceSaleDouble}"></span>
+
+                        <!-- Разница > 0 -->
+                        <span th:if="${item.differenceSale > 0}"
+                              th:text="'↑ ' + ${item.differenceSale}"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    </span>
+
+                        <!-- Разница < 0 -->
+                        <span th:if="${item.differenceSale < 0}"
+                              th:text="'↓ ' + ${item.differenceSale}"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    </span>
+
+                        <!-- Разница = 0 -->
+                        <span th:if="${item.differenceSale == 0}"
+                              th:text="${item.differenceSale}"
+                              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                    </span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--==================================================-->
+<!-- End Dreamhub Dashboard section -->
+<!--==================================================-->
+
+
 </body>
 </html>
